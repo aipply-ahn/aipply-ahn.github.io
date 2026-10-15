@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+  body { @apply bg-space text-suit font-sans antialiased; }
+  ::selection { @apply bg-flare text-space; }
+}
+
+@layer components {
+  .section { @apply mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28; }
+  .eyebrow { @apply font-display text-xs font-medium uppercase tracking-[0.25em] text-visor; }
+  .h2 { @apply mt-3 font-display text-3xl font-bold tracking-tight sm:text-5xl; }
+  .card { @apply rounded-2xl border border-white/10 bg-space-800/80 backdrop-blur; }
+}
+
+/* 별 배경 */
+.stars {
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,.55) 50%, transparent 51%),
+    radial-gradient(1px 1px at 70% 15%, rgba(255,255,255,.4) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 85% 60%, rgba(255,255,255,.5) 50%, transparent 51%),
+    radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,.35) 50%, transparent 51%),
+    radial-gradient(1px 1px at 10% 65%, rgba(255,255,255,.45) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 55% 45%, rgba(255,255,255,.3) 50%, transparent 51%);
+  background-size: 420px 420px;
+}
+
+@keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-14px) } }
+.float { animation: float 6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .float { animation: none } html { scroll-behavior: auto } }

@@ -1,0 +1,53 @@
+import { research, convergence } from '../data/research.js'
+
+const accentCls = {
+  visor: { text: 'text-visor', border: 'hover:border-visor/50', dot: 'bg-visor', glow: 'bg-visor/15' },
+  flare: { text: 'text-flare', border: 'hover:border-flare/50', dot: 'bg-flare', glow: 'bg-flare/15' },
+}
+
+export default function Research() {
+  return (
+    <section id="research" className="section">
+      <p className="eyebrow">Research</p>
+      <h2 className="h2">두 개의 궤도, 하나의 AI</h2>
+
+      <div className="mt-12 grid gap-6 md:grid-cols-2">
+        {research.map((r) => {
+          const a = accentCls[r.accent]
+          return (
+            <article id={r.id} key={r.id} className={`card group relative overflow-hidden p-8 transition ${a.border}`}>
+              <div className={`pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full blur-3xl ${a.glow}`} />
+              <p className={`font-display text-xs tracking-[0.25em] ${a.text}`}>{r.code}</p>
+              <h3 className="mt-4 font-display text-3xl font-bold">{r.title}</h3>
+              <p className={`mt-1 text-lg font-semibold ${a.text}`}>{r.titleKo}</p>
+              <p className="mt-5 leading-relaxed text-suit/70">{r.summary}</p>
+              <ul className="mt-6 grid gap-2 sm:grid-cols-2">
+                {r.topics.map((t) => (
+                  <li key={t} className="flex items-start gap-2 text-sm text-suit/85">
+                    <span className={`mt-2 h-1.5 w-1.5 shrink-0 rounded-full ${a.dot}`} />
+                    {t}
+                  </li>
+                ))}
+              </ul>
+              {r.highlights.length > 0 && (
+                <div className="mt-6 flex flex-wrap gap-2 border-t border-white/10 pt-5">
+                  <span className="text-xs text-suit/40">개발 도구</span>
+                  {r.highlights.map((h) => (
+                    <span key={h} className={`font-display text-xs ${a.text}`}>{h}</span>
+                  ))}
+                </div>
+              )}
+            </article>
+          )
+        })}
+      </div>
+
+      <div className="card mt-6 flex flex-col gap-2 p-6 sm:flex-row sm:items-center sm:gap-6">
+        <p className="font-display text-lg font-bold">
+          <span className="text-visor">Bio</span> × <span className="text-flare">Manufacturing</span>
+        </p>
+        <p className="text-sm text-suit/70">{convergence.text}</p>
+      </div>
+    </section>
+  )
+}
