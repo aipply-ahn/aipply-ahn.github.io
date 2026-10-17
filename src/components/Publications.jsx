@@ -27,8 +27,8 @@ function Chip({ active, onClick, children }) {
   return (
     <button
       onClick={onClick}
-      className={`rounded-full px-4 py-1.5 text-sm transition ${
-        active ? 'bg-suit text-space' : 'border border-white/15 text-suit/70 hover:text-suit'
+      className={`border-2 px-3 py-1 font-pixel text-xs transition ${
+        active ? 'border-suit bg-suit text-space' : 'border-white/15 text-suit/70 hover:border-white/40 hover:text-suit'
       }`}
     >
       {children}
@@ -59,32 +59,35 @@ export default function Publications() {
   return (
     <section id="publications" className="border-y border-white/5 bg-space-800/40">
       <div className="section">
-        <p className="eyebrow">Publications</p>
-        <h2 className="h2">논문</h2>
+        <p className="hud text-visor">Stage 02 · Publications</p>
+        <h2 className="h2">탐사 기록</h2>
 
-        <h3 className="mt-12 font-display text-sm font-medium uppercase tracking-[0.2em] text-suit/50">Selected Work</h3>
+        <h3 className="hud mt-12 text-suit/50">Rare Finds — 대표 논문</h3>
         <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {featuredPapers.map((p) => (
             <li key={p.title}>
               <a
                 href={p.link || undefined}
-                className="card group flex h-full flex-col p-6 transition hover:border-white/25"
+                className={`pixel-box group flex h-full flex-col p-6 transition hover:-translate-y-1 ${p.type === 'intl' ? 'hover:border-flare' : 'hover:border-visor'}`}
               >
+                <p className={`hud mb-3 ${p.type === 'intl' ? 'text-flare' : 'text-visor'}`}>
+                  {p.type === 'intl' ? '★ Legendary' : '◆ Rare'}
+                </p>
                 <div className="flex items-start justify-between gap-3">
                   <p className={`font-display text-lg font-bold leading-tight ${p.area === 'mfg' ? 'text-flare' : 'text-visor'}`}>
                     {shortVenue(p.venue)}
                   </p>
-                  <span className="font-display text-sm text-suit/40">{p.year}</span>
+                  <span className="font-pixel text-sm text-suit/40">{p.year}</span>
                 </div>
                 <p className="mt-4 font-semibold leading-snug">{p.title}</p>
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-suit/60">{p.note}</p>
-                <p className="mt-4 text-xs text-suit/45 group-hover:text-suit/80">논문 보기 ↗</p>
+                <p className="hud mt-4 text-suit/45 group-hover:text-suit/80">▶ 논문 보기</p>
               </a>
             </li>
           ))}
         </ul>
 
-        <h3 className="mt-16 font-display text-sm font-medium uppercase tracking-[0.2em] text-suit/50">All Publications</h3>
+        <h3 className="hud mt-16 text-suit/50">Full Log — 전체 논문</h3>
         <div className="mt-4 flex flex-col gap-3">
           <div className="flex flex-wrap gap-2">
             {types.map((t) => (
@@ -106,7 +109,7 @@ export default function Publications() {
           {shown.length === 0 && <p className="text-suit/50">해당하는 논문이 없습니다.</p>}
           {shown.map(([year, items]) => (
             <div key={year} className="grid gap-4 md:grid-cols-[120px_1fr]">
-              <p className="font-display text-2xl font-bold text-suit/40">{year}</p>
+              <p className="font-pixel text-2xl text-suit/40">{year}</p>
               <ul className="divide-y divide-white/10">
                 {items.map((p, i) => (
                   <li key={i} className="py-4 first:pt-0">
@@ -128,7 +131,7 @@ export default function Publications() {
         {byYear.length > INITIAL_YEARS && (
           <button
             onClick={() => setShowAll(!showAll)}
-            className="mt-10 rounded-full border border-white/15 px-5 py-2 text-sm text-suit/80 hover:text-suit"
+            className="pixel-btn mt-10 border-white/20 bg-space-800 text-suit/80 hover:text-suit"
           >
             {showAll ? '접기' : `이전 논문 더 보기 (${byYear.slice(INITIAL_YEARS).reduce((n, [, v]) => n + v.length, 0)}편)`}
           </button>

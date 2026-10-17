@@ -13,6 +13,8 @@ export default {
       fontFamily: {
         sans: ['Pretendard', 'Inter', 'system-ui', 'sans-serif'],
         display: ['"Space Grotesk"', 'Pretendard', 'sans-serif'],
+        // 게임 UI 라벨용 한글 픽셀 폰트
+        pixel: ['Galmuri11', 'Galmuri9', 'monospace'],
       },
     },
   },
