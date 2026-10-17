@@ -1,5 +1,13 @@
 import { site } from '../data/site.js'
 import { research } from '../data/research.js'
+import { publications } from '../data/publications.js'
+
+const stats = [
+  { value: publications.length, label: 'Publications' },
+  { value: publications.filter((p) => p.type === 'intl').length, label: 'International' },
+  { value: research.length, label: 'Research Orbits' },
+  { value: site.since, label: 'Since' },
+]
 
 export default function Hero() {
   return (
@@ -16,7 +24,8 @@ export default function Hero() {
             <br />
             <span className="text-visor">Life</span> &amp; <span className="text-flare">Making</span>
           </h1>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-suit/70 sm:text-lg">{site.intro}</p>
+          <p className="mt-6 text-xl font-semibold tracking-tight text-suit sm:text-2xl">{site.slogan}</p>
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-suit/65">{site.intro}</p>
 
           <div className="mt-8 flex flex-wrap gap-3">
             {research.map((r) => (
@@ -33,6 +42,15 @@ export default function Hero() {
               </a>
             ))}
           </div>
+
+          <dl className="mt-10 grid max-w-xl grid-cols-2 gap-x-3 gap-y-5 border-t border-white/10 pt-6 sm:grid-cols-4">
+            {stats.map((s) => (
+              <div key={s.label} className="flex flex-col-reverse">
+                <dt className="mt-1 text-[11px] uppercase tracking-[0.15em] text-suit/45">{s.label}</dt>
+                <dd className="font-display text-2xl font-bold sm:text-3xl">{s.value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
 
         <div className="relative mx-auto aspect-square w-full max-w-[420px]">
